@@ -1,0 +1,150 @@
+<h1>จัดการงาน To-Do List</h1>
+<h2>ระบบบันทึกงาน Tasks To-Do List</h2>
+<div class="row">
+  <div class="col-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">เพิ่มสิ่งที่ต้องทำ</h5>
+        <h6 class="card-subtitle mb-2 text-muted">กำหนดสิ่งที่ต้องทำ</h6>
+        <form>
+          <div class="form-group">
+            <label for="taskName">งานที่ต้องทำ</label>
+            <input
+              type="text"
+              class="form-control"
+              id="taskName"
+              name="taskName"
+            />
+          </div>
+          <div class="form-group">
+            <label for="taskDescription">รายละเอียด</label>
+            <textarea
+              class="form-control"
+              id="taskDescription"
+              name="taskDescription"
+              rows="3"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="taskDueDate">กำหนดการ</label>
+            <input
+              type="date"
+              class="form-control"
+              id="taskDueDate"
+              name="taskDueDate"
+            />
+          </div>
+          <div class="form-group">
+            <label for="taskPriority">ความสำคัญ</label>
+            <select class="form-control" id="taskPriority" name="taskPriority">
+              <option value="1">🔴 สูง</option>
+              <option value="2">🟡 กลาง</option>
+              <option value="3">🟢 ต่ำ</option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary mt-2"
+            (submit)="addNewTask()"
+          >
+            เพิ่มงาน
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Tasks</h5>
+        <h6 class="card-subtitle mb-2 text-muted">รายการสิ่งที่ต้องทำ</h6>
+        <div class="row">
+          <div class="col-4">
+            <div class="card border-danger border-2">
+              <div class="card-body">
+                <h6 class="card-title">🔴 งานที่มีความสำคัญสูง</h6>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">งาน</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let task of tasks_high">
+                      <td [ngClass]="{ 'bg-light': task.status == 'done' }">
+                        <strong class="text-danger">{{ task.dueDate }}</strong
+                        >&nbsp;<span
+                          class="badge bg-dark text-white"
+                          *ngIf="task.status == 'done'"
+                          >Done</span
+                        ><br />
+                        {{ task.title }}<br />
+                        {{ task.description }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card border-warning border-2">
+              <div class="card-body">
+                <h6 class="card-title">🟡 งานที่มีความสำคัญกลาง</h6>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">งาน</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let task of tasks_medium">
+                      <td [ngClass]="{ 'bg-light': task.status == 'done' }">
+                        <strong class="text-danger">{{ task.dueDate }}</strong
+                        >&nbsp;<span
+                          class="badge bg-dark text-white"
+                          *ngIf="task.status == 'done'"
+                          >Done</span
+                        ><br />
+                        {{ task.title }}<br />
+                        {{ task.description }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="card border-success border-2">
+              <div class="card-body">
+                <h6 class="card-title">🟢 งานที่มีความสำคัญต่ำ</h6>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th scope="col">งาน</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let task of tasks_low">
+                      <td [ngClass]="{ 'bg-light': task.status == 'done' }">
+                        <strong class="text-danger">{{ task.dueDate }}</strong
+                        >&nbsp;<span
+                          class="badge bg-dark text-white"
+                          *ngIf="task.status == 'done'"
+                          >Done</span
+                        ><br />
+                        {{ task.title }}<br />
+                        {{ task.description }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
